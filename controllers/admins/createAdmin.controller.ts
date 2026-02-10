@@ -1,8 +1,10 @@
 import type { Request, Response } from 'express';
+import sendMail from '../../util/email/sendMail';
 import type { adminType } from '../../types/admin';
 import { hashPassword } from '../../security/hashPwd';
 import createAdminQuery from '../../sql/admins/createAdmin.sql';
 import { findExistingAdmin } from '../../sql/admins/findExistingAdmin.sql';
+import { SuccessfulAdminRegistration } from '../../util/email/functions/successfulRegistration';
 
 export async function createAdminController(req: Request, res: Response) {
     try {
@@ -32,7 +34,7 @@ export async function createAdminController(req: Request, res: Response) {
         }
 
         const pwdHash = await hashPassword(password)
-        const admin:adminType = {
+        const admin: adminType = {
             firstName,
             lastName,
             username,
@@ -43,7 +45,7 @@ export async function createAdminController(req: Request, res: Response) {
 
         const successfulCreate = await createAdminQuery(admin)
 
-        res.send({
+        res.status(201).json({
             message: 'admin created successfully',
             admin: successfulCreate,
             success: true
@@ -56,7 +58,20 @@ export async function createAdminController(req: Request, res: Response) {
             }
         };
 
-    } catch (error) {
+        const sendingBody = SuccessfulAdminRegistration(emailDetails)
 
+        sendMail(sendingBody)
+
+        res.status(200).json({
+            msg: 'sent admin an email',
+            success: true
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500)
+            .send({
+                message: 'Internal Server Error. Please check your inputs and try again',
+                success: false
+            })
     }
 }
