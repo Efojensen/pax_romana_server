@@ -1,12 +1,11 @@
-import bcrypt from 'bcrypt'
 import pool from '../../config/db';
 import type { adminType } from '../../types/admin';
 
-export const createAdminQuery = async (admin: adminType) => {
+const createAdminQuery = async (admin: adminType) => {
     try {
         let query = `INSERT INTO admin (firstname, lastname, username, email, password, photo_url)
                             VALUES ($1, $2, $3, $4, $5, $6)
-                            RETURNING *;`;
+                            ;`;
 
         const values = [
             admin.firstName,
@@ -17,11 +16,14 @@ export const createAdminQuery = async (admin: adminType) => {
             admin.photo_url
         ];
 
-        const res = await pool.query(query, values)
+        const { rows } = await pool.query(query, values)
 
-        console.log('admin created successfully');
+        console.log('admin created successfully')
+        return rows[0]
     } catch (error) {
         console.error("Error running admin creation query: ", error);
         throw error;
     }
 }
+
+export default createAdminQuery

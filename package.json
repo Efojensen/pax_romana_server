@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun --watch --env-file=.env index.ts"
+    "dev": "bun --bun --watch --env-file=.env index.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
