@@ -1,3 +1,19 @@
 import { Router } from 'express'
+import { getAdminById } from '../controllers/admins/getAdminById.controller'
+import { createAdminController } from '../controllers/admins/createAdmin.controller'
+import { getAllAdminsController } from '../controllers/admins/getAllAdmins.controller'
+import { updateAdminProfileController } from '../controllers/admins/updateAdmin.controller'
+import { getDashboardStatistics } from '../controllers/admins/getDashboardStatistics.controller'
 
 const router = Router()
+
+router.get('/:adminID', getAdminById)
+router.post('/', createAdminController)
+router.get('/', getAllAdminsController)
+router.post('/login', loginAdminController)
+router.get('/stats', getDashboardStatistics)
+router.patch('/:id', updateAdminProfileController)
+router.put('/:adminID/update/:attribute', updateAdminProfileController)
+router.put('/:adminID/update/profile/names', updateAdminNameController)
+
+export default router

@@ -14,3 +14,15 @@ export async function findExistingAdmin(email: string, username: string) {
         usernameExists: rows[0].username_exists,
     };
 }
+export async function findExistingAdminByUsername(username: string) {
+    const query = `
+        SELECT
+            EXISTS (SELECT 1 FROM admin WHERE username = $1) AS username_exists
+    `;
+
+    const { rows } = await pool.query(query, [username]);
+
+    return {
+        usernameExists: rows[0].username_exists,
+    };
+}

@@ -17,22 +17,20 @@ export async function getAllAdminsController(req: Request, res: Response) {
         if (admins && !admins.length) {
             console.log('No admins found');
 
-            return res.send({
+            return res.json({
                 message: "No admins found",
                 success: true
             });
         };
 
-        res.status(200)
-            .send({
+        res.status(200).json({
                 message: "Admins found",
                 admins: admins,
                 success: true
             });
     } catch (error) {
         console.error(error);
-        res.status(500)
-            .send({
+        res.status(500).json({
                 message: "Internal Server error. Please check your inputs and try again",
                 success: false
             })

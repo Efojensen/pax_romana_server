@@ -1,5 +1,6 @@
 import cors from 'cors'
 import express from 'express';
+import adminRoutes from './routes/admin.routes'
 
 const app = express();
 
@@ -18,10 +19,12 @@ app.use(cors({
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true // Enable credentials (cookies, etc.) if needed
+    credentials: true
 }))
 
-app.get('/', (req, res) => {
+app.use('/admins', adminRoutes)
+
+app.get('/', (_, res) => {
     res.send('Hello World from Bun & Express!');
 });
 
