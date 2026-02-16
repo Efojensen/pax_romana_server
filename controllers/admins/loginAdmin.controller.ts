@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
-import { findAndReturnExistingAdmin } from '../../sql/admins/findExistingAdmin.sql';
 import { verifyPwd } from '../../security/verifyPwd';
 import { generateToken } from '../../util/auth/generateToken';
+import { findAndReturnExistingAdmin } from '../../sql/admins/findExistingAdmin.sql';
 
 export async function loginAdminController(req: Request, res: Response) {
     const { emailOrUsername, password } = req.body;
