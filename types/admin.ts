@@ -1,4 +1,5 @@
 export interface adminType {
+    id?: string
     email: string
     lastName: string
     username: string
