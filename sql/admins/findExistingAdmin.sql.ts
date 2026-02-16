@@ -4,7 +4,7 @@ import type { adminType } from '../../types/admin';
 export async function findExistingAdmin(email: string, username: string) {
     const query = `
         SELECT
-            EXISTS (SELECT 1 FROM admin WHERE email = $1)    AS email_exists,
+            EXISTS (SELECT 1 FROM admin WHERE email = $1) AS email_exists,
             EXISTS (SELECT 1 FROM admin WHERE username = $2) AS username_exists
     `;
 

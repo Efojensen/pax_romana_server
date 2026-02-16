@@ -1,39 +1,26 @@
 import type { Request, Response } from 'express'
 import { findAdminByID } from '../../sql/admins/findAdminById';
 import { findExistingAdminByUsername } from '../../sql/admins/findExistingAdmin.sql';
+import { updateAdminProfile } from '../../sql/admins/updateProfile.sql';
 
 export async function updateAdminProfileController(req: Request, res: Response) {
     try {
-        const { value } = req.body;
-
         const id = String(req.params.adminID);
-        const attribute = req.params.attribute;
 
         let existingAdmin = await findAdminByID(id);
 
         if (!existingAdmin.length) {
             console.log("Admin not found. ID:", id);
             return res.status(404)
-                .send({
+                .json({
                     message: 'Admin not found. Please try again',
                     success: false
                 });
         };
 
-        // check for existing admin usernames
-        if (attribute === "username") {
-            existingAdmin = await findExistingAdminByUsername(value);
-            if (existingAdmin.length && id !== existingAdmin[0].id) {
-                console.log("Username already in use");
-                return res.status(409)
-                    .json({
-                        message: "Username already in use. Please try again",
-                        success: false
-                    });
-            }
-        };
+        const { value } = req.body;
 
-        const successfulEdit = await updateProfile('admin', attribute, value, id);
+        const successfulEdit = await updateAdminProfile(id, value)
 
         console.log(successfulEdit);
 

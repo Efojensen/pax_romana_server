@@ -4,8 +4,7 @@ import type { adminType } from '../../types/admin';
 const createAdminQuery = async (admin: adminType) => {
     try {
         let query = `INSERT INTO admin (firstname, lastname, username, email, password, photo_url)
-                            VALUES ($1, $2, $3, $4, $5, $6)
-                            ;`;
+                        VALUES ($1, $2, $3, $4, $5, $6);`;
 
         const values = [
             admin.firstName,

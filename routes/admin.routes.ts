@@ -13,8 +13,6 @@ router.post('/', createAdminController)
 router.get('/', getAllAdminsController)
 router.post('/login', loginAdminController)
 router.get('/stats', getDashboardStatistics)
-router.patch('/:id', updateAdminProfileController)
-router.put('/:adminID/update/:attribute', updateAdminProfileController)
-router.put('/:adminID/update/profile/names', updateAdminNameController)
+router.patch('/:id/update', updateAdminProfileController)
 
 export default router

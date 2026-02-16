@@ -50,7 +50,7 @@ export async function loginAdminController(req: Request, res: Response) {
             success: true
         }).status(200);
     } catch (error) {
-        console.log(`Error ${error}`)
+        console.error(`Error ${error}`)
         return res.json({
             message: `Something went wrong on our end`,
             success: false

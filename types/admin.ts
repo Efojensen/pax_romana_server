@@ -7,3 +7,12 @@ export interface adminType {
     firstName: string
     photo_url: string
 }
+
+export type UpdateAdminInput = {
+    email?: string;
+    lastName?: string;
+    username?: string;
+    password?: string;
+    firstName?: string;
+    photo_url?: string;
+};
