@@ -1,7 +1,7 @@
 import pool from '../../config/db';
-import type { adminType, UpdateAdminInput } from '../../types/admin';
+import type { AdminType, UpdateAdminInput } from '../../types/admin';
 
-export async function updateAdminProfile(adminId: string, updates: UpdateAdminInput): Promise<adminType> {
+export async function updateAdminProfile(adminId: string, updates: UpdateAdminInput): Promise<AdminType> {
     try {
         const allowedFields = ['email' , 'lastName', 'username', 'password', 'firstName' ,'photo_url']
 

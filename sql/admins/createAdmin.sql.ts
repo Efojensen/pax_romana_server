@@ -1,7 +1,7 @@
 import pool from '../../config/db';
-import type { adminType } from '../../types/admin';
+import type { AdminType } from '../../types/admin';
 
-const createAdminQuery = async (admin: adminType) => {
+const createAdminQuery = async (admin: AdminType) => {
     try {
         let query = `INSERT INTO admin (firstname, lastname, username, email, password, photo_url)
                         VALUES ($1, $2, $3, $4, $5, $6);`;

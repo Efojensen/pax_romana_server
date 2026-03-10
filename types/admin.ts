@@ -1,4 +1,4 @@
-export interface adminType {
+export interface AdminType {
     id?: string
     email: string
     lastName: string

@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import sendMail from '../../util/email/sendMail';
-import type { adminType } from '../../types/admin';
+import type { AdminType } from '../../types/admin';
 import { hashPassword } from '../../security/hashPwd';
 import createAdminQuery from '../../sql/admins/createAdmin.sql';
 import { findExistingAdmin } from '../../sql/admins/findExistingAdmin.sql';
@@ -34,7 +34,7 @@ export async function createAdminController(req: Request, res: Response) {
         }
 
         const pwdHash = await hashPassword(password)
-        const admin: adminType = {
+        const admin: AdminType = {
             firstName,
             lastName,
             username,

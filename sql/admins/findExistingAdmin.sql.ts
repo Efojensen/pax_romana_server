@@ -1,5 +1,5 @@
 import pool from '../../config/db';
-import type { adminType } from '../../types/admin';
+import type { AdminType } from '../../types/admin';
 
 export async function findExistingAdmin(email: string, username: string) {
     const query = `
@@ -28,7 +28,7 @@ export async function findExistingAdminByUsername(username: string) {
     };
 }
 
-export async function findAndReturnExistingAdmin(emailOrUsername: string): Promise<adminType> {
+export async function findAndReturnExistingAdmin(emailOrUsername: string): Promise<AdminType> {
     try {
         const query = `SELECT * FROM admin WHERE email = $1 OR username = $1`;
 
