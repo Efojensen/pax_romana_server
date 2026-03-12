@@ -22,10 +22,10 @@ CREATE TYPE genders_enum AS ENUM(
         'F'
 );
 
-CREATE TABLE members(
+CREATE TABLE citizens(
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
-        email TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
         pwd_hash TEXT NOT NULL,
         gender genders_enum,
         photo_url TEXT,
