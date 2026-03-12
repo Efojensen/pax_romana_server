@@ -9,3 +9,10 @@ export interface CitizenType {
     birthDate: Date,
     phoneNumber: string,
 }
+
+export interface ReturnedCitizen {
+    name: string,
+    email: string,
+    gender: string,
+    phoneNumber: string,
+}
