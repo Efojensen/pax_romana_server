@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express';
 import adminRoutes from './routes/admin.routes'
+import citizenRoutes from './routes/citizens.routes'
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cors({
 }))
 
 app.use('/admins', adminRoutes)
+app.use('/citizens', citizenRoutes)
 
 app.get('/', (_, res) => {
     res.send('Hello World from Bun & Express!');
