@@ -1,27 +1,22 @@
 import pool from '../../config/db';
-import type { AdminType } from '../../types/admin';
+import type { ReturnedCitizen } from '../../types/citizen';
+import { CustomError } from '../../types/error';
 
-const createAdminQuery = async (admin: AdminType) => {
+const createAdminQuery = async (member_id: number): Promise<ReturnedCitizen> => {
     try {
-        let query = `INSERT INTO admin (firstname, lastname, username, email, password, photo_url)
-                        VALUES ($1, $2, $3, $4, $5, $6);`;
+        let query = `INSERT INTO admins (member_id) VALUES ($1) RETURNING member_id;`;
 
-        const values = [
-            admin.firstName,
-            admin.lastName,
-            admin.username,
-            admin.email,
-            admin.pwd_hash,
-            admin.photo_url
-        ];
-
-        const { rows } = await pool.query(query, values)
-
+        const { rows } = await pool.query(query, [member_id])
         console.log('admin created successfully')
-        return rows[0]
+
+        let next_query = `SELECT name, email, gender, phone_number FROM citizens WHERE id = $1;`;
+
+        const res = await pool.query(next_query, [rows[0]])
+
+        return res.rows[0]
     } catch (error) {
         console.error("Error running admin creation query: ", error);
-        throw error;
+        throw new CustomError('admin already exists', 409);
     }
 }
 

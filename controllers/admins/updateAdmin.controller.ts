@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import { findAdminByID } from '../../sql/admins/findAdminById';
-import { findExistingAdminByUsername } from '../../sql/admins/findExistingAdmin.sql';
 import { updateAdminProfile } from '../../sql/admins/updateProfile.sql';
+import { findExistingAdminByUsername } from '../../sql/admins/findExistingAdmin.sql';
 
 export async function updateAdminProfileController(req: Request, res: Response) {
     try {
