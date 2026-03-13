@@ -11,7 +11,7 @@ const createAdminQuery = async (member_id: number): Promise<ReturnedCitizen> => 
 
         let next_query = `SELECT name, email, gender, phone_number FROM citizens WHERE id = $1;`;
 
-        const res = await pool.query(next_query, [rows[0]])
+        const res = await pool.query(next_query, [rows[0].member_id])
 
         return res.rows[0]
     } catch (error) {

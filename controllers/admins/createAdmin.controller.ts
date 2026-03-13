@@ -17,21 +17,21 @@ export async function createAdminController(req: Request, res: Response) {
             success: true
         })
 
-        let emailDetails = {
-            sender: process.env['EMAIL_ADDRESS'],
-            recipient: {
-                ...successfulCreate
-            }
-        };
+        // let emailDetails = {
+        //     sender: process.env['EMAIL_ADDRESS'],
+        //     recipient: {
+        //         ...successfulCreate
+        //     }
+        // };
 
-        const sendingBody = SuccessfulAdminRegistration(emailDetails)
+        // const sendingBody = SuccessfulAdminRegistration(emailDetails)
 
-        sendMail(sendingBody)
+        // sendMail(sendingBody)
 
-        res.status(200).json({
-            msg: 'sent admin an email',
-            success: true
-        })
+        // res.status(200).json({
+        //     msg: 'sent admin an email',
+        //     success: true
+        // })
     } catch (error) {
         console.error(error);
         res.status(500)
