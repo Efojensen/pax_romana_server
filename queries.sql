@@ -85,3 +85,17 @@ CREATE TABLE announcements(
         subgroup_id INT,
         CONSTRAINT fk_announcement_for FOREIGN KEY (subgroup_id) REFERENCES subgroups(id)
 );
+
+CREATE OR REPLACE FUNCTION set_default_if_null()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.level IS NULL THEN
+        NEW.level := 100;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER tgr_set_default
+BEFORE INSERT ON citizens
+FOR EACH ROW EXECUTE FUNCTION set_default_if_null();

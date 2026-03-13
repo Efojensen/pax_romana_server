@@ -49,6 +49,7 @@ export async function createCitizenController(req: Request, res: Response) {
             success: true
         })
     } catch (e) {
+        console.log(e)
         res.status(500).json({
             message: 'internal server error',
             error: e,
