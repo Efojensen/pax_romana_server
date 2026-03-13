@@ -1,6 +1,6 @@
 import pool from '../../config/db';
-import type { ReturnedCitizen } from '../../types/citizen';
 import { CustomError } from '../../types/error';
+import type { ReturnedCitizen } from '../../types/citizen';
 
 const createAdminQuery = async (member_id: number): Promise<ReturnedCitizen> => {
     try {

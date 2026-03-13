@@ -9,8 +9,8 @@ import { getDashboardStatistics } from '../controllers/admins/getDashboardStatis
 const router = Router()
 
 router.get('/:adminID', getAdminById)
-router.post('/', createAdminController)
 router.get('/', getAllAdminsController)
+router.post('/new', createAdminController)
 router.post('/login', loginAdminController)
 router.get('/stats', getDashboardStatistics)
 router.patch('/:id/update', updateAdminProfileController)
