@@ -14,5 +14,6 @@ export interface ReturnedCitizen {
     name: string,
     email: string,
     gender: string,
+    programme: string,
     phoneNumber: string,
 }
