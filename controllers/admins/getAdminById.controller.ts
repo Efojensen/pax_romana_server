@@ -3,9 +3,16 @@ import { findAdminByID } from '../../sql/admins/findAdminById'
 
 export async function getAdminById(req: Request, res: Response) {
     try {
-        const adminID = String(req.params.id)
+        const adminID = String(req.params.adminID)
 
-        const admin = findAdminByID(adminID)
+        if (!adminID || adminID === undefined) {
+            return res.status(404).json({
+                message: 'admin id not provided',
+                success: false
+            })
+        }
+
+        const admin = await findAdminByID(adminID)
 
         if (!admin) {
             return res.status(404)
