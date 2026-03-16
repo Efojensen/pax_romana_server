@@ -1,13 +1,12 @@
 import pool from '../../config/db';
-import type { AdminType, UpdateAdminInput } from '../../types/admin';
+import type { UpdateCitizenData } from '../../types/citizen';
 
-export async function updateAdminProfile(adminId: string, updates: UpdateAdminInput): Promise<AdminType> {
+export async function updateAdminProfile(adminId: string, updates: UpdateCitizenData): Promise<UpdateCitizenData> {
     try {
-        const allowedFields = ['email' , 'lastName', 'username', 'password', 'firstName' ,'photo_url']
+        const allowedFields = ['name', 'email', 'gender', 'photo_url', 'phone_number',
+            'birth_date', 'programme_id', 'campus_residency', 'level']
 
-        const keys = Object.keys(updates).filter((key) => {
-            allowedFields.includes(key)
-        });
+        const keys = Object.keys(updates).filter((key) => allowedFields.includes(key))
 
         if (keys.length === 0) {
             throw new Error('No fields provided for update');
@@ -21,9 +20,9 @@ export async function updateAdminProfile(adminId: string, updates: UpdateAdminIn
         const values = keys.map((key) => (updates as any)[key]);
 
         const query = `
-            UPDATE admin
+            UPDATE citizens
             SET ${setClause}
-            WHERE id = $${keys.length + 1}
+            WHERE id = (SELECT member_id FROM admins WHERE id = $${keys.length + 1})
             RETURNING *;
         `;
 

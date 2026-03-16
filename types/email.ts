@@ -1,7 +1,7 @@
-import type { adminType } from "./admin";
+import type { CitizenType } from "./citizen";
 
 export interface typeOfEmail {
-    recipient: adminType
+    recipient: CitizenType
     sender: string | undefined;
 }
 

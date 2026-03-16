@@ -1,12 +1,12 @@
-import type { adminType } from "../../types/admin"
+import type { CitizenType } from "../../types/citizen"
 
-const SuccessfulAdminRegistrationHTML = (adminDetails: adminType) => {
+const SuccessfulAdminRegistrationHTML = (adminDetails: CitizenType) => {
     return `
         <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
             <h2 style="color: #1a73e8; text-align: center;">Welcome to the PAX Romana KNUST Admin Platform!</h2>
 
-            <p>Hey there ${adminDetails.firstName},</p>
+            <p>Hey there ${adminDetails.name},</p>
 
             <p>
               We are thrilled to have you join our family! You have successfully been registered as an Admin, and we have set up your account for access to our platform.
@@ -23,7 +23,7 @@ const SuccessfulAdminRegistrationHTML = (adminDetails: adminType) => {
               </tr>
               <tr>
                 <td style="font-weight: bold;">Temporary Password:</td>
-                <td style="color: #e53935;">${adminDetails.pwd_hash}</td>
+                <td style="color: #e53935;">${adminDetails.pwdHash}</td>
               </tr>
             </table>
 

@@ -17,3 +17,15 @@ export interface ReturnedCitizen {
     programme: string,
     phoneNumber: string,
 }
+
+export interface UpdateCitizenData {
+    name?: string,
+    email?: string,
+    level?: string,
+    gender?: string,
+    birth_date?: Date,
+    photo_url?: string,
+    programme_id?: string,
+    phone_number?: string,
+    campus_residence?: string,
+}
