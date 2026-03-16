@@ -28,4 +28,5 @@ export interface UpdateCitizenData {
     programme_id?: string,
     phone_number?: string,
     campus_residence?: string,
+    subgroups?: string | string[]
 }

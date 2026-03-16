@@ -12,7 +12,6 @@ export async function updateAdminProfile(adminId: string, updates: UpdateCitizen
             throw new Error('No fields provided for update');
         }
 
-        // Build SET clause dynamically
         const setClause = keys
             .map((key, index) => `${key.toLowerCase()} = $${index + 1}`)
             .join(', ');
