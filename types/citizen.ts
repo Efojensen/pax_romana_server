@@ -10,23 +10,17 @@ export interface CitizenType {
     phoneNumber: string,
 }
 
-export interface ReturnedCitizen {
-    name: string,
-    email: string,
-    gender: string,
-    programme: string,
-    phoneNumber: string,
-}
-
-export interface UpdateCitizenData {
+export interface CitizenData {
     name?: string,
     email?: string,
     level?: string,
     gender?: string,
     birth_date?: Date,
     photo_url?: string,
+    programme?: string,
     programme_id?: string,
     phone_number?: string,
-    campus_residence?: string,
+    hall_or_hostel?: string,
+    campus_residency?: string,
     subgroups?: string | string[]
 }
