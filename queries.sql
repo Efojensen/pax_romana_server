@@ -41,8 +41,8 @@ CREATE TABLE citizens(
 
 CREATE TABLE admins (
         id SERIAL PRIMARY KEY,
-        member_id INT,
-        CONSTRAINT fk_to_member FOREIGN KEY (member_id) REFERENCES members(id)
+        citizen_id INT,
+        CONSTRAINT fk_to_citizen FOREIGN KEY (citizen_id) REFERENCES citizens(id)
 );
 
 CREATE TABLE subgroups (
@@ -58,21 +58,21 @@ CREATE TABLE subgroups (
 );
 
 CREATE TABLE subgroup_memberships (
-        member_id INT,
+        citizen_id INT,
         subgroup_id INT,
         joined_on TIMESTAMPTZ DEFAULT NOW(),
-        PRIMARY KEY(member_id, subgroup_id),
-        CONSTRAINT fk_member FOREIGN KEY (member_id) REFERENCES members(id),
+        PRIMARY KEY(citizen_id, subgroup_id),
+        CONSTRAINT fk_citizen FOREIGN KEY (citizen_id) REFERENCES citizens(id),
         CONSTRAINT fk_subgroup FOREIGN KEY (subgroup_id) REFERENCES subgroups(id)
 );
 
 CREATE TABLE executives(
         id SERIAL PRIMARY KEY,
-        member_id INT,
+        citizen_id INT,
         position TEXT,
         subgroup_id INT,
         year_group TEXT,
-        CONSTRAINT fk_member_executive FOREIGN KEY (member_id) REFERENCES members(id),
+        CONSTRAINT fk_citizen_executive FOREIGN KEY (citizen_id) REFERENCES citizens(id),
         CONSTRAINT fk_subgroup_executive FOREIGN KEY (subgroup_id) REFERENCES subgroups(id)
 );
 
