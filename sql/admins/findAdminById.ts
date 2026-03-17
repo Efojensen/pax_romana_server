@@ -1,8 +1,8 @@
 import pool from '../../config/db';
 import { CustomError } from '../../types/error';
-import type { ReturnedCitizen } from '../../types/citizen';
+import type { CitizenData } from '../../types/citizen';
 
-export async function findAdminByID(adminID: string): Promise<ReturnedCitizen> {
+export async function findAdminByID(adminID: string): Promise<CitizenData> {
     try {
         const query = `
         SELECT c.name, c.email, c.phone_number, p.name AS programme, c.level FROM citizens AS c

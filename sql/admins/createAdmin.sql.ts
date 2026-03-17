@@ -1,8 +1,8 @@
 import pool from '../../config/db';
 import { CustomError } from '../../types/error';
-import type { ReturnedCitizen } from '../../types/citizen';
+import type { CitizenData } from '../../types/citizen';
 
-const createAdminQuery = async (member_id: number): Promise<ReturnedCitizen> => {
+const createAdminQuery = async (member_id: number): Promise<CitizenData> => {
     try {
         let query = `INSERT INTO admins (member_id) VALUES ($1) RETURNING member_id;`;
 

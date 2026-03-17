@@ -1,30 +1,30 @@
 import type { Request, Response } from 'express'
-import { findAdminByID } from '../../sql/admins/findAdminById'
+import { getCitizenByIdQuery } from '../../sql/citizens/getCitizenById.sql'
 
-export async function getAdminById(req: Request, res: Response) {
+export async function getCitizenById(req: Request, res: Response) {
     try {
-        const adminID = String(req.params.adminID)
+        const citizenID = String(req.params.id)
 
-        if (!adminID || adminID === undefined) {
+        if (!citizenID || citizenID === undefined) {
             return res.status(404).json({
-                message: 'admin id not provided',
+                message: 'citizen id not provided',
                 success: false
             })
         }
 
-        const admin = await findAdminByID(adminID)
+        const paxCitizen = await getCitizenByIdQuery(citizenID)
 
-        if (!admin) {
+        if (!paxCitizen) {
             return res.status(404).json({
-                message: "No admin with that ID was found",
+                message: "No citizen with that ID was found",
                 success: false,
             });
         }
 
         return res.status(200).json({
-            message: "Admin found",
+            paxCitizen,
+            message: "citizen found",
             success: true,
-            admin
         });
     } catch (error) {
         res.status(500).json({

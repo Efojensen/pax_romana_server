@@ -1,7 +1,7 @@
 import pool from '../../config/db';
-import type { UpdateCitizenData } from '../../types/citizen';
+import type { CitizenData } from '../../types/citizen';
 
-export async function updateAdminProfile(adminId: string, updates: UpdateCitizenData): Promise<UpdateCitizenData> {
+export async function updateAdminProfile(adminId: string, updates: CitizenData): Promise<CitizenData> {
     try {
         const allowedFields = ['name', 'email', 'gender', 'photo_url', 'phone_number',
             'birth_date', 'programme_id', 'campus_residency', 'level']

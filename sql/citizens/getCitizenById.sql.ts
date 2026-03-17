@@ -1,7 +1,7 @@
-import pool from '../../config/db';
-import type { CitizenData } from '../../types/citizen';
+import pool from "../../config/db"
+import type { CitizenData } from "../../types/citizen";
 
-export async function getAllCitizens(): Promise<CitizenData[]> {
+export async function getCitizenByIdQuery(citizenId: string): Promise<CitizenData> {
     try {
         const query = `
             SELECT c.name, c.email, c.gender, c.phone_number, c.birth_date, p.name AS programme, h.name AS hall_or_hostel, json_agg(s.name) AS subgroups FROM citizens AS c
@@ -9,12 +9,13 @@ export async function getAllCitizens(): Promise<CitizenData[]> {
                 INNER JOIN campus_residences AS h ON c.campus_residency = h.id
                 LEFT JOIN subgroup_memberships AS x ON c.id = x.citizen_id
                 LEFT JOIN subgroups AS s ON x.subgroup_id = s.id
-                    GROUP BY c.name, c.email, c.gender, c.phone_number, c.birth_date, p.name, h.name;`
+                WHERE c.id = $1
+                GROUP BY c.name, c.email, c.gender, c.phone_number, c.birth_date, p.name, h.name;`
 
-        const citizensData = await pool.query(query)
+            const citizens = await pool.query(query, [citizenId]);
 
-        return citizensData.rows;
+            return citizens.rows[0];
     } catch (error) {
-        throw error
+        throw error;
     }
 }
