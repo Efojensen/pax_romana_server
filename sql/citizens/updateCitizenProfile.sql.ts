@@ -1,7 +1,7 @@
 import pool from '../../config/db';
 import type { CitizenData } from '../../types/citizen';
 
-export async function updateAdminProfile(adminId: string, updates: CitizenData): Promise<CitizenData> {
+export async function updateCitizenProfile(citizenID: string, updates: CitizenData): Promise<CitizenData> {
     try {
         const allowedFields = ['name', 'email', 'gender', 'photo_url', 'phone_number',
             'birth_date', 'programme_id', 'campus_residency', 'level']
@@ -25,7 +25,7 @@ export async function updateAdminProfile(adminId: string, updates: CitizenData):
             RETURNING *;
         `;
 
-        const result = await pool.query(query, [...values, adminId]);
+        const result = await pool.query(query, [...values, citizenID]);
 
         return result.rows[0];
     } catch (error) {

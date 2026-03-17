@@ -6,7 +6,7 @@ CREATE TABLE colleges(
 CREATE TABLE programmes(
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
-        duration INT NOT NULL,
+        duration INT DEFAULT 4,
         college_id INT,
         CONSTRAINT fk_college FOREIGN KEY (college_id) REFERENCES colleges(id)
 );

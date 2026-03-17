@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import type { CitizenData } from '../../types/citizen';
 import { findAdminByID } from '../../sql/admins/findAdminById';
-import { updateAdminProfile } from '../../sql/admins/updateAdminProfile.sql';
+import { updateCitizenProfile } from '../../sql/citizens/updateCitizenProfile.sql';
 
 export async function updateAdminProfileController(req: Request, res: Response) {
     try {
@@ -12,27 +12,25 @@ export async function updateAdminProfileController(req: Request, res: Response) 
         if (!existingAdmin) {
             console.log("Admin not found. ID:", id);
             return res.status(404).json({
-                message: 'Admin not found. Please try again',
+                message: 'admin not found. please try again',
                 success: false
             });
         };
 
         const value: CitizenData = req.body;
 
-        const successfulEdit = await updateAdminProfile(id, value)
-
-        console.log(successfulEdit);
+        const successfulEdit = await updateCitizenProfile(id, value)
 
         return res.status(200).json({
-            message: "Admin profile updated successfully",
+            message: "admin profile updated successfully",
             admin: successfulEdit,
             success: true
         });
     } catch (error) {
-        console.error(error);
         res.status(500).json({
-            message: 'Internal Server Error. Please check your inputs and try again',
+            message: 'internal server error. please check your inputs and try again',
             success: false
         });
+        console.error(error);
     }
 }
