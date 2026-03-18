@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express';
 import adminRoutes from './routes/admin.routes'
+import generalRoutes from './routes/general.routes'
 import citizenRoutes from './routes/citizens.routes'
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(cors({
 }))
 
 app.use('/admins', adminRoutes)
+app.use('/general', generalRoutes)
 app.use('/citizens', citizenRoutes)
 
 app.get('/', (_, res) => {

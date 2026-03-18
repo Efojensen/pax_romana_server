@@ -82,17 +82,21 @@ CREATE TABLE announcements(
         body TEXT,
         summary TEXT,
         photo_url TEXT,
-        subgroup_id INT,
-        CONSTRAINT fk_announcement_for FOREIGN KEY (subgroup_id) REFERENCES subgroups(id)
+);
+
+CREATE TABLE announcement_subgroups (
+        announcement_id INTEGER REFERENCES announcements(id) ON DELETE CASCADE,
+        subgroup_id INTEGER REFERENCES subgroups(id) ON DELETE CASCADE,
+        PRIMARY KEY (announcement_id, subgroup_id)
 );
 
 CREATE OR REPLACE FUNCTION set_default_if_null()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF NEW.level IS NULL THEN
-        NEW.level := 100;
-    END IF;
-    RETURN NEW;
+        IF NEW.level IS NULL THEN
+                NEW.level := 100;
+        END IF;
+        RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
