@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import type { Announcement } from '../../../types/announcement';
-import { createAnnouncementRecord } from '../../../sql/general/createAnnouncementRecord.sql';
+import { createAnnouncementRecord } from '../../../sql/general/createAnnouncement.sql';
 
 export async function createAnnouncementController(req: Request, res: Response) {
     try {
