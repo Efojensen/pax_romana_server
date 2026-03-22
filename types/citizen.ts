@@ -24,3 +24,8 @@ export interface CitizenData {
     campus_residency?: string,
     subgroups?: string | string[]
 }
+
+export interface AdminData extends CitizenData {
+    admin_id: string,
+    pwd_hash: string
+}

@@ -1,26 +1,26 @@
 import type { Request, Response } from 'express'
 import { verifyPwd } from '../../security/verifyPwd';
 import { generateToken } from '../../util/auth/generateToken';
-// import { findAndReturnExistingAdmin } from '../../sql/admins/findExistingAdmin.sql';
+import { findAndReturnExistingAdmin } from '../../sql/admins/findExistingAdmin.sql';
 
 export async function loginAdminController(req: Request, res: Response) {
-    const { emailOrUsername, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!emailOrUsername || !password) {
+    if (!email || !password) {
         return res.json({
-            message: "Email/Username and Password required",
+            message: 'email and password required',
             success: false
         }).status(400);
     }
 
     try {
-        const existingAdmin = await findAndReturnExistingAdmin(emailOrUsername)
+        const existingAdmin = await findAndReturnExistingAdmin(email)
 
         if (!existingAdmin) {
-            console.log("Admin not found");
+            console.log('admin not found');
 
             return res.json({
-                message: "No Admin with that username/email found",
+                message: 'no admin with that email found',
                 success: false
             }).status(404);
         }
@@ -29,28 +29,26 @@ export async function loginAdminController(req: Request, res: Response) {
 
         if (!isPasswordValid) {
             return res.json({
-                message: "Invalid password",
+                message: 'invalid password',
                 success: false
             }).status(401);
         };
 
-        const accessToken = generateToken(existingAdmin.id!);
+        const accessToken = generateToken(existingAdmin.admin_id!);
 
         return res.json({
-            message: "Logged in successfully",
+            message: 'logged in successfully',
             admin: {
-                id: existingAdmin.id,
+                name: existingAdmin.name,
                 email: existingAdmin.email,
-                username: existingAdmin.username,
-                lastName: existingAdmin.lastName,
-                firstName: existingAdmin.firstName,
+                id: existingAdmin.admin_id,
                 photo_url: existingAdmin.photo_url,
             },
             access_token: accessToken,
             success: true
         }).status(200);
     } catch (error) {
-        console.error(`Error ${error}`)
+        console.error(`error: ${error}`)
         return res.json({
             message: `Something went wrong on our end`,
             success: false

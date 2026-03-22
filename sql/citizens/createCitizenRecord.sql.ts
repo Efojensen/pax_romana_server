@@ -1,7 +1,7 @@
 import pool from '../../config/db';
-import type { CitizenType } from '../../types/citizen';
+import type { CitizenData, CitizenType } from '../../types/citizen';
 
-export async function createCitizenRecord(citizenData: CitizenType): Promise<CitizenType> {
+export async function createCitizenRecord(citizenData: CitizenType): Promise<CitizenData> {
     try {
         const query = `
             INSERT INTO citizens
