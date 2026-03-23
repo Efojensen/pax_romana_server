@@ -8,7 +8,7 @@ export function generateToken(admin: AdminData, email: string): string {
         {
             email: email,
             name: admin.name,
-            id: admin.admin_id,
+            admin_id: admin.admin_id,
         },
         jwtSecretKey,
         { expiresIn: '1h' }
