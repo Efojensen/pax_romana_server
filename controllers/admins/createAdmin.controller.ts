@@ -6,10 +6,10 @@ import { SuccessfulAdminRegistration } from '../../util/email/functions/successf
 export async function createAdminController(req: Request, res: Response) {
     try {
         const {
-            member_id
+            citizen_id
         } = req.body;
 
-        const successfulCreate = await createAdminQuery(member_id)
+        const successfulCreate = await createAdminQuery(citizen_id)
 
         res.status(201).json({
             message: 'admin created successfully',

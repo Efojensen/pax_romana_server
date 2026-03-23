@@ -5,7 +5,7 @@ export async function findAndReturnExistingAdmin(email: string): Promise<AdminDa
     try {
         const query = `
             SELECT c.name, c.pwd_hash, a.id AS admin_id FROM citizens AS c
-                INNER JOIN admins AS a ON a.member_id = c.id
+                INNER JOIN admins AS a ON a.citizen_id = c.id
                 WHERE c.email = $1;`;
 
         const existingAdmin = await pool.query(query, [email]);

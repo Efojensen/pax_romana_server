@@ -6,7 +6,7 @@ export async function findAdminByID(adminID: string): Promise<CitizenData> {
     try {
         const query = `
         SELECT c.name, c.email, c.phone_number, p.name AS programme, c.level FROM citizens AS c
-            INNER JOIN admins AS a ON a.member_id = c.id
+            INNER JOIN admins AS a ON a.citizen_id = c.id
             INNER JOIN programmes AS p ON c.programme_id = p.id WHERE a.id = $1;`;
 
         const existingAdmin = await pool.query(query, [adminID]);
