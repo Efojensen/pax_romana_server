@@ -1,5 +1,5 @@
-import pool from "../../config/db"
-import type { Announcement } from "../../types/announcement"
+import pool from "../../../config/db"
+import type { Announcement } from "../../../types/announcement"
 
 export async function getAllAnnouncementsQuery():Promise<Announcement[]> {
     try {

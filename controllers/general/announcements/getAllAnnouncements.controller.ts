@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { getAllAnnouncementsQuery } from '../../../sql/general/getAllAnnouncements.sql';
+import { getAllAnnouncementsQuery } from '../../../sql/general/announcements/getAllAnnouncements.sql';
 
 export async function getAllAnnouncementController(req: Request, res: Response) {
     try {
