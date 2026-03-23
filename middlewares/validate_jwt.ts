@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import type { Request, Response, NextFunction } from 'express';
+import type { AdminData } from '../types/citizen';
 
 export const validateJwt = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'];
@@ -7,9 +8,16 @@ export const validateJwt = (req: Request, res: Response, next: NextFunction) => 
 
     if (!token) return res.sendStatus(401);
 
-    jwt.verify(token, process.env.JWT_SECRET as string, (err, user) => {
-        if (err) return res.sendStatus(403);
-        // req.user = user; // Attach the user info to the request
+    try {
+        const decoded = jwt.verify(token, process.env['JWT_SECRET'] as string);
+
+        if (typeof decoded === "string") {
+            return res.sendStatus(403);
+        }
+
+        req.admin = decoded as AdminData;
         next();
-    });
+    } catch {
+        return res.sendStatus(403);
+    }
 };

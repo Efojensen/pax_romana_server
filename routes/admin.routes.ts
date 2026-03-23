@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { getAdminById } from '../controllers/admins/getAdminById.controller'
-import { loginAdminController } from '../controllers/admins/loginAdmin.controller'
+import { loginAdminController } from '../controllers/admins/login.controller'
 import { createAdminController } from '../controllers/admins/createAdmin.controller'
 import { getAllAdminsController } from '../controllers/admins/getAllAdmins.controller'
 import { updateAdminProfileController } from '../controllers/admins/updateAdmin.controller'

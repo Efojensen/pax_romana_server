@@ -34,19 +34,18 @@ export async function loginAdminController(req: Request, res: Response) {
             }).status(401);
         };
 
-        const accessToken = generateToken(existingAdmin.admin_id!);
+        const accessToken = generateToken(existingAdmin, email);
 
-        return res.json({
+        return res.status(200).json({
             message: 'logged in successfully',
             admin: {
+                email,
                 name: existingAdmin.name,
-                email: existingAdmin.email,
                 id: existingAdmin.admin_id,
-                photo_url: existingAdmin.photo_url,
             },
             access_token: accessToken,
             success: true
-        }).status(200);
+        });
     } catch (error) {
         console.error(`error: ${error}`)
         return res.json({
