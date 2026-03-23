@@ -38,12 +38,12 @@ export async function createAnnouncementRecord(newAnnouncement: Announcement): P
             )
         }
         const res = await client.query(
-            `SELECT a.title, a.body, a.summary, a.photo_url,
+            `SELECT ann.title, ann.body, ann.summary, ann.photo_url,
                 COALESCE(json_agg(s.name) FILTER (where s.id IS NOT NULL), '[]') AS subgroups
-                FROM announcements AS a
-                    LEFT JOIN announcement_subgroups AS x ON a.id = x.announcement_id
-                    LEFT JOIN subgroups AS s ON x.subgroup_id = s.id WHERE a.id = $1
-                GROUP BY a.id;`, [announcementId])
+                FROM announcements AS ann
+                    LEFT JOIN announcement_subgroups AS x ON ann.id = x.announcement_id
+                    LEFT JOIN subgroups AS s ON x.subgroup_id = s.id WHERE ann.id = $1
+                GROUP BY ann.id;`, [announcementId])
 
         await client.query('COMMIT')
 

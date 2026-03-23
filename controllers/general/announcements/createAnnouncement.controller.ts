@@ -4,7 +4,7 @@ import { createAnnouncementRecord } from '../../../sql/general/createAnnouncemen
 
 export async function createAnnouncementController(req: Request, res: Response) {
     try {
-        const announcement:Announcement= req.body
+        const announcement:Announcement = req.body
 
         const theAnnouncement = await createAnnouncementRecord(announcement)
 
