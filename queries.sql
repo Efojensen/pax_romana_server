@@ -81,7 +81,7 @@ CREATE TABLE announcements(
         title TEXT NOT NULL,
         body TEXT,
         summary TEXT,
-        photo_url TEXT,
+        photo_url TEXT
 );
 
 CREATE TABLE announcement_subgroups (

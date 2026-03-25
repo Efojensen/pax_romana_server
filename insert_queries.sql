@@ -1,3 +1,12 @@
+--Insert statements for the various colleges
+INSERT INTO colleges (name) VALUES('College of Agriculture and Natural Resources');
+INSERT INTO colleges (name) VALUES('College of Art and Built Environment');
+INSERT INTO colleges (name) VALUES('College of Engineering');
+INSERT INTO colleges (name) VALUES('College of Health Sciences');
+INSERT INTO colleges (name) VALUES('College of Humanities and Social Sciences');
+INSERT INTO colleges (name) VALUES('College of Science');
+
+--
 INSERT INTO programmes (name, college_id) VALUES ('BSc. Agriculture', 1);
 INSERT INTO programmes (name, college_id) VALUES ('BSc. Agricultural Biotechnology', 1);
 INSERT INTO programmes (name, college_id) VALUES ('BSc. Agribusiness Management', 1);
