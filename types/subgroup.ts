@@ -1,5 +1,5 @@
 export interface Subgroup {
-    name: String,
+    name?: String,
     motto?: String,
     photo_url?: String,
     created_by?: String,
