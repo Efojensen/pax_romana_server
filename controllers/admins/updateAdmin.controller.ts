@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import type { CitizenData } from '../../types/citizen';
 import { findAdminByID } from '../../sql/admins/findAdminById';
-import { updateCitizenProfile } from '../../sql/citizens/updateCitizenProfile.sql';
+import { updateAdminProfile } from '../../sql/admins/updateAdminProfile.sql';
 
 export async function updateAdminProfileController(req: Request, res: Response) {
     try {
@@ -19,10 +19,10 @@ export async function updateAdminProfileController(req: Request, res: Response) 
 
         const value: CitizenData = req.body;
 
-        const successfulEdit = await updateCitizenProfile(id, value)
+        const successfulEdit = await updateAdminProfile(id, value)
 
         return res.status(200).json({
-            message: "admin profile updated successfully",
+            message: 'admin profile updated successfully',
             admin: successfulEdit,
             success: true
         });
