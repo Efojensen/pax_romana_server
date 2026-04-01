@@ -21,7 +21,7 @@ export async function updateCitizenProfile(citizenID: string, updates: CitizenDa
         const query = `
             UPDATE citizens
             SET ${setClause}
-            WHERE id = (SELECT citizen_id FROM admins WHERE id = $${keys.length + 1})
+            WHERE id = (SELECT id FROM citizens WHERE id = $${keys.length + 1})
             RETURNING *;
         `;
 
