@@ -6,13 +6,15 @@ import { createSubgroupController } from '../controllers/general/subgroups/creat
 import { getSubgroupByIdController } from '../controllers/general/subgroups/getSubgroupById.controller';
 import { createAnnouncementController } from '../controllers/general/announcements/createAnnouncement.controller';
 import { getAllAnnouncementController } from '../controllers/general/announcements/getAllAnnouncements.controller';
+import { getAnnouncementByIdController } from '../controllers/general/announcements/getAnnouncementById.controller';
 
 const router = Router();
 
-router.get('/subgroups', getSubgroupsController)
-router.get('/subgroups/:id', getSubgroupByIdController)
+router.get('/subgroups', getSubgroupsController);
+router.get('/subgroups/:id', getSubgroupByIdController);
 router.get('/announcements', getAllAnnouncementController);
-router.post('/subgroups/new', validateJwt, createSubgroupController)
+router.get('/announcements/:id', getAnnouncementByIdController);
+router.post('/subgroups/new', validateJwt, createSubgroupController);
 router.post('/announcements/new', validateJwt,createAnnouncementController);
 router.patch('/subgroups/:id/update', validateJwt, updateSubgroupController);
 
