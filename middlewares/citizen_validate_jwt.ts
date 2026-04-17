@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import type { CitizenData } from '../types/citizen';
+import type { CitizenType } from '../types/citizen';
 import type { Request, Response, NextFunction } from 'express';
 
 export const citizenValidateJwt = (req: Request, res: Response, next: NextFunction) => {
@@ -18,7 +18,7 @@ export const citizenValidateJwt = (req: Request, res: Response, next: NextFuncti
             return res.sendStatus(403);
         }
 
-        req.citizen = decoded as CitizenData;
+        req.citizen = decoded as CitizenType;
         next();
     } catch {
         return res.sendStatus(403);

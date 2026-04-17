@@ -4,7 +4,15 @@ import { updateCitizenProfile } from '../../sql/citizens/updateCitizenProfile.sq
 
 export async function updateCitizenController(req: Request, res: Response) {
     try {
-        const id = String(req.params.id);
+        const id = req.citizen?.id
+        console.log("citizen id: ",id)
+
+        if (!id) {
+            return res.status(400).json({
+                message: 'id not provided',
+                success: false
+            })
+        }
 
         const value: CitizenData = req.body;
 

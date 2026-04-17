@@ -7,8 +7,8 @@ export function generateCitizenToken(citizen: CitizenType, email: string): strin
     const token = jwt.sign(
         {
             email: email,
+            id: citizen.id,
             name: citizen.name,
-            citizen_id: citizen.id,
         },
         jwtSecretKey,
         { expiresIn: '1h' }

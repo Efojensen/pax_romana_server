@@ -12,6 +12,6 @@ router.get('/:id', getCitizenById)
 router.get('/', getAllCitizensController)
 router.post('/new', createCitizenController)
 router.post('/login', loginCitizenController)
-router.patch('/:id/update', citizenValidateJwt, updateCitizenController)
+router.patch('/update', citizenValidateJwt, updateCitizenController)
 
 export default router

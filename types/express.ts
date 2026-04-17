@@ -1,4 +1,4 @@
-import type { AdminData, CitizenData } from "./citizen"
+import type { AdminData, CitizenType } from "./citizen"
 
 export {}
 
@@ -6,7 +6,7 @@ declare global {
     namespace Express {
         export interface Request {
             admin?: AdminData
-            citizen?: CitizenData
+            citizen?: CitizenType
         }
     }
 }
