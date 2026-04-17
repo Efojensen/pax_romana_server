@@ -23,7 +23,7 @@ const SuccessfulAdminRegistrationHTML = (adminDetails: CitizenType) => {
               </tr>
               <tr>
                 <td style="font-weight: bold;">Temporary Password:</td>
-                <td style="color: #e53935;">${adminDetails.pwdHash}</td>
+                <td style="color: #e53935;">${adminDetails.pwdhash}</td>
               </tr>
             </table>
 

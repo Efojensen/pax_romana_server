@@ -36,9 +36,9 @@ export async function createCitizenController(req: Request, res: Response) {
             hostel,
             gender,
             program,
-            pwdHash,
             birthDate,
-            phoneNumber
+            phoneNumber,
+            pwdhash: pwdHash,
         }
 
         const response = await createCitizenRecord(citizenData)

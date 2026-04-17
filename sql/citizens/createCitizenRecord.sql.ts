@@ -13,14 +13,14 @@ export async function createCitizenRecord(citizenData: CitizenType): Promise<Cit
 
         const values = [
             citizenData.name,
+            citizenData.level,
             citizenData.email,
-            citizenData.pwdHash,
-            citizenData.gender,
-            citizenData.phoneNumber,
-            citizenData.birthDate,
-            citizenData.program,
             citizenData.hostel,
-            citizenData.level
+            citizenData.gender,
+            citizenData.program,
+            citizenData.pwdhash,
+            citizenData.birthDate,
+            citizenData.phoneNumber,
         ]
 
         const result = await pool.query(query, values)

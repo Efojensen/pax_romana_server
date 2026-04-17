@@ -5,7 +5,7 @@ export interface CitizenType {
     level: number
     hostel: number
     gender: string
-    pwdHash: string
+    pwdhash: string
     program: number
     birthDate: Date
     phoneNumber: string

@@ -1,37 +1,37 @@
 import type { Request, Response } from 'express'
 import { verifyPwd } from '../../security/verifyPwd';
 import { generateCitizenToken } from '../../util/auth/generateCitizenToken';
-import { findExistingCitizen } from '../../sql/citizens/findExistingCitizen.sql';
+import { findAndReturnExistingCitizen } from '../../sql/citizens/findExistingCitizen.sql';
 
 export async function loginCitizenController(req: Request, res: Response) {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.json({
-            message: 'email and password required',
-            success: false
-        }).status(400);
-    }
-
     try {
-        const existingCitizen = await findExistingCitizen(email)
+        if (!email || !password || password.trim() === '') {
+            return res.status(400).json({
+                message: 'email and password required',
+                success: false
+            });
+        }
+
+        const existingCitizen = await findAndReturnExistingCitizen(email)
 
         if (!existingCitizen) {
             console.log('citizen not found');
 
-            return res.json({
+            return res.status(401).json({
                 message: 'no citizen with that email found',
                 success: false
-            }).status(404);
+            });
         }
 
-        const isPasswordValid = await verifyPwd(password, existingCitizen.pwdHash);
+        const isPasswordValid = await verifyPwd(password, existingCitizen.pwdhash);
 
         if (!isPasswordValid) {
-            return res.json({
+            return res.status(401).json({
                 message: 'invalid password',
                 success: false
-            }).status(401);
+            });
         };
 
         const accessToken = generateCitizenToken(existingCitizen, email);
@@ -48,9 +48,9 @@ export async function loginCitizenController(req: Request, res: Response) {
         });
     } catch (error) {
         console.error(`error: ${error}`)
-        return res.json({
+        return res.status(500).json({
             message: `Something went wrong on our end`,
             success: false
-        }).status(500);
+        })
     }
 }

@@ -8,7 +8,7 @@ export function generateCitizenToken(citizen: CitizenType, email: string): strin
         {
             email: email,
             name: citizen.name,
-            admin_id: citizen.id,
+            citizen_id: citizen.id,
         },
         jwtSecretKey,
         { expiresIn: '1h' }
