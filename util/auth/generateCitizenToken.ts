@@ -1,14 +1,14 @@
 import jwt from 'jsonwebtoken'
-import type { AdminData, CitizenType } from '../../types/citizen';
+import type { CitizenType } from "../../types/citizen"
 
-export function generateToken(admin: AdminData, email: string): string {
+export function generateCitizenToken(citizen: CitizenType, email: string): string {
     const jwtSecretKey = process.env['JWT_SECRET']!;
 
     const token = jwt.sign(
         {
             email: email,
-            name: admin.name,
-            admin_id: admin.admin_id,
+            name: citizen.name,
+            admin_id: citizen.id,
         },
         jwtSecretKey,
         { expiresIn: '1h' }

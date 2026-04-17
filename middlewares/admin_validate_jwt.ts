@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import type { Request, Response, NextFunction } from 'express';
 import type { AdminData } from '../types/citizen';
+import type { Request, Response, NextFunction } from 'express';
 
 export const validateJwt = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'];
