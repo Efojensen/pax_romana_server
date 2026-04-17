@@ -5,7 +5,14 @@ import { updateAdminProfile } from '../../sql/admins/updateAdminProfile.sql';
 
 export async function updateAdminProfileController(req: Request, res: Response) {
     try {
-        const id = String(req.params.id);
+        const id = req.admin?.admin_id
+
+        if (!id) {
+            return res.status(400).json({
+                message: 'no id provided',
+                success: false
+            })
+        }
 
         let existingAdmin = await findAdminByID(id);
 
